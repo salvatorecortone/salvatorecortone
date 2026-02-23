@@ -1,0 +1,212 @@
+/* --- Variables & Reset --- */
+:root {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --accent-color: #d4af37;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 1.6;
+}
+
+/* --- Typography --- */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.5rem; text-align: center; margin-bottom: 2rem; color: var(--accent-color); }
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid var(--accent-color);
+}
+
+.btn:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+}
+
+.btn-outline:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* --- Navigation --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: rgba(18, 18, 18, 0.95);
+    z-index: 1000;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a:hover { color: var(--accent-color); }
+
+/* Mobile Menu Button */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 25px;
+    background-color: var(--text-color);
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('Images/salva_profile.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-content h1 { margin-bottom: 0.5rem; }
+.hero-content p { font-size: 1.2rem; margin-bottom: 2rem; font-style: italic; }
+
+/* --- Sections Generic --- */
+.container {
+    padding: 80px 10%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- About Section --- */
+.about-section {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.about-text { flex: 1; }
+.about-text h2 { text-align: left; }
+.about-image { flex: 1; }
+.about-image img {
+    width: 100%;
+    border-radius: 4px;
+    filter: sepia(20%); 
+}
+
+/* --- Video Grid (Instagram) --- */
+.video-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+    gap: 20px;
+}
+
+.instagram-wrapper {
+    background: #fff; 
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 350px; 
+    width: 100%;
+}
+
+/* --- Contact & Footer --- */
+.contact-section { text-align: center; }
+.socials {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    .about-section { flex-direction: column; }
+    .about-text h2 { text-align: center; }
+    
+    /* Mobile Navigation Dropdown */
+    .menu-toggle { display: flex; }
+    
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 100%;
+        background-color: rgba(18, 18, 18, 0.98);
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 0;
+        display: none; /* Hidden by default */
+    }
+
+    .nav-links.active {
+        display: flex; /* Shown when toggled by JS */
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+}

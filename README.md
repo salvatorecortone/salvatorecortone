@@ -1,16 +1,14 @@
-## Hi there 👋
+# Salvatore Harmonica
 
-<!--
-**salvatorecortone/salvatorecortone** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+This is the official portfolio website for Salvatore, an independent folk harmonica player. 
 
-Here are some ideas to get you started:
+## Tech Stack
+* HTML5
+* CSS3
+* Vanilla JavaScript (Mobile Menu)
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Features
+* Responsive design (Mobile friendly)
+* Embedded Instagram Reels
+* Custom Dark/Gold Folk theme
+* Hosted on GitHub Pages
