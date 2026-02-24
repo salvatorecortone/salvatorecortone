@@ -1,6 +1,6 @@
 /* --- Variables & Reset --- */
 :root {
-    --bg-color: #121212;
+    --bg-color: #000000;
     --text-color: #e0e0e0;
     --accent-color: #d4af37;
     --font-heading: 'Playfair Display', serif;
@@ -119,7 +119,7 @@ nav {
 }
 
 .hero-content h1 { margin-bottom: 0.5rem; }
-.hero-content p { font-size: 1.2rem; margin-bottom: 2rem; font-style: italic; }
+.hero-content p { font-size: 1.2rem; margin-bottom: 2rem; font-style: italic; text-align: justify; }
 
 /* --- Sections Generic --- */
 .container {
@@ -130,10 +130,14 @@ nav {
 
 /* --- About Section --- */
 .about-section {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('Images/about_image.JPEG');
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
-    gap: 50px;
-    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
 }
 
 .about-text { flex: 1; }
@@ -154,23 +158,73 @@ nav {
 }
 
 .instagram-wrapper {
-    background: #fff; 
+    background: #000000; 
     border-radius: 8px;
     overflow: hidden;
     max-width: 350px; 
     width: 100%;
 }
+.instagram-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap; /* Do not wrap */
+  overflow: hidden;
+}
+
+.ig-wrapper {
+  flex: 1 1 0;
+  transform: scale(0.8);  /* Shrinks each Instagram embed */
+  transform-origin: top left;
+  margin-right: 10px;
+}
+
+.ig-wrapper:last-child {
+  margin-right: 0;
+}
 
 /* --- Contact & Footer --- */
-.contact-section { text-align: center; }
+.contact-section {
+    text-align: center;
+}
+
+.contact-section h2 {
+    margin-bottom: 10px; /* Reduces space below the heading */
+}
+
+.contact-section p {
+    font-size: 1.2rem; /* Increases paragraph font size */
+}
+
 .socials {
     margin-top: 30px;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    gap: 15px; /* Space between icons */
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Icon container size */
+    height: 50px; /* Icon container size */
+    border-radius: 50%; /* Circular background */
+    background-color: #f0f0f0; /* Light gray background */
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+.social-icon i {
+    font-size: 24px; /* Icon size */
+    color: #333; /* Icon color */
+}
+
+.social-icon:hover {
+    background-color: #e0e0e0; /* Darker gray on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.social-icon:hover i {
+    color: #0073b1; /* Change icon color on hover */
 }
 
 footer {
@@ -180,6 +234,7 @@ footer {
     font-size: 0.8rem;
     color: #666;
 }
+
 
 /* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
