@@ -1,3 +1,4 @@
+
 // =============================================
 // SAL HARMONICA WEBSITE - MAIN SCRIPT
 // Features: Mobile Menu, Infinite Video Gallery, Smooth Scroll, Drag Scroll, Touch Optimization
