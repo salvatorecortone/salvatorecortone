@@ -374,6 +374,75 @@ transform:translateY(-50%) scale(1.1);
 .left-arrow{left:10px;}
 .right-arrow{right:10px;}
 
+/* =========================
+   VIDEO GALLERY ARROWS STYLING
+   ========================= */
+
+.video-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.video-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 0 60px; /* Space for arrows */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+}
+
+.video-grid::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari */
+}
+
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.scroll-arrow:hover {
+    background: rgba(0, 0, 0, 0.9);
+    /* Remove transform: scale(1.1) to avoid shifting */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+/* Ensure arrows are always visible and don't overlap content */
+@media (max-width: 768px) {
+    .scroll-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
 
 
 /* --- Contact & Footer --- */
