@@ -3,16 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Harmonica lessons with Salvatore Harmonica. Learn to play blues, rock, pop, and more with a practical, step-by-step method.">
     <title>Sal Harmonica - Harmonica Lessons</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Load only necessary font variants -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Load Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Temporary fix for button alignment */
+        .text-center {
+            text-align: center;
+            margin: 2rem 0;
+            clear: both;
+            display: block;
+        }
+        .btn {
+            display: inline-block;
+        }
+        /* YouTube iframe optimization */
+        .youtube-wrapper iframe {
+            width: 100%;
+            max-width: 200px;
+            height: 350px;
+            background: #000;
+        }
+    </style>
 </head>
 <body>
-
     <nav>
         <div class="logo">SAL HARMONICA</div>
-        <div class="menu-toggle" id="mobile-menu">
+        <div class="menu-toggle" id="mobile-menu" aria-label="Mobile menu">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
@@ -29,41 +50,38 @@
 
     <header id="home" class="hero">
         <div class="hero-content">
-           <h1>Unlock Your Harmonica Potential</h1>
-           <p>Start making music from day one with a practical, step-by-step approach.</p>
-           <a href="https://form.jotform.com/260584437873064" class="btn">Book Your First FREE Lesson</a>
-
+            <h1>Unlock Your Harmonica Potential</h1>
+            <p>Start making music from day one with a practical, step-by-step approach.</p>
+            <a href="https://form.jotform.com/260584437873064" class="btn" target="_blank" rel="noopener noreferrer">Book Your First FREE Lesson</a>
         </div>
     </header>
 
     <section id="method" class="container about-section">
         <div class="about-text">
-           
-        <h2>My Teaching Method</h2>
-<p>
-    My approach is <strong>practical, expressive, and tailored to you</strong>. Whether you're a beginner or an advanced player, I'll guide you step-by-step to play the harmonica with confidence and creativity.
-</p>
-<p>
-    You'll learn to play in a variety of styles, from <strong>Blues and Rock</strong> to <strong>Pop, Soul, World Music, Hip-Hop, and more</strong>. My goal is to help you find your unique voice on the harmonica and make music that resonates.
-</p>
+            <h2>My Teaching Method</h2>
+            <p>
+                My approach is <strong>practical, expressive, and tailored to you</strong>. Whether you're a beginner or an advanced player, I'll guide you step-by-step to play the harmonica with confidence and creativity.
+            </p>
+            <p>
+                You'll learn to play in a variety of styles, from <strong>Blues and Rock</strong> to <strong>Pop, Soul, World Music, Hip-Hop, and more</strong>. My goal is to help you find your unique voice on the harmonica and make music that resonates.
+            </p>
 
-<div class="method-highlights">
-    <h3>What You'll Achieve:</h3>
-    <ul>
-        <li>Play your first songs <strong>from day one</strong>.</li>
-        <li>Master essential techniques like bending, tongue-blocking, and vibrato.</li>
-        <li>Explore diverse musical styles and develop your own sound.</li>
-        <li>Build a solid foundation and progress to advanced skills.</li>
-        <li>Gain confidence to perform and improvise.</li>
-    </ul>
-</div>
+            <div class="method-highlights">
+                <h3>What You'll Achieve:</h3>
+                <ul>
+                    <li>Play your first songs <strong>from day one</strong>.</li>
+                    <li>Master essential techniques like bending, tongue-blocking, and vibrato.</li>
+                    <li>Explore diverse musical styles and develop your own sound.</li>
+                    <li>Build a solid foundation and progress to advanced skills.</li>
+                    <li>Gain confidence to perform and improvise.</li>
+                </ul>
+            </div>
 
-<div class="lesson-info">
-    <h3>Lessons Available In:</h3>
-    <p><strong>English, Portuguese, Italian, Spanish</strong></p>
-    <h3>Online or On-Site in Lisbon</h3>
-</div>
-
+            <div class="lesson-info">
+                <h3>Lessons Available In:</h3>
+                <p><strong>English, Portuguese, Italian, Spanish</strong></p>
+                <h3>Online or On-Site in Lisbon</h3>
+            </div>
         </div>
     </section>
 
@@ -74,17 +92,18 @@
                 <i class="fas fa-chevron-left"></i>
             </button>
             <div class="video-grid">
+                <!-- YouTube iframes with optimized loading -->
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/aDEm4xFelMU" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/aDEm4xFelMU"></div>
                 </div>
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/aDEm4xFelMU" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/aDEm4xFelMU"></div>
                 </div>
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/aDEm4xFelMU" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/aDEm4xFelMU"></div>
                 </div>
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/aDEm4xFelMU" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/aDEm4xFelMU"></div>
                 </div>
             </div>
             <button class="scroll-arrow right-arrow" aria-label="Scroll right">
@@ -96,16 +115,15 @@
     <section id="about" class="container about-section">
         <div class="about-text">
             <h2>About Me</h2>
-<p>
-    I’m Salvatore Cortone, a full-time harmonica player, multi-instrumentalist, and educator with a lifelong passion for music. From a young age, I’ve been captivated by the harmonica and its ability to convey emotion and energy across genres.
-</p>
-<p>
-    I’ve performed with bands like <strong>Hugo and the Bad Jujus</strong>, <strong>Oyun Malotira</strong>, and <strong>Magmell</strong>, and have played at festivals across Portugal and internationally. My experience spans a wide range of musical styles, and I bring that diversity to my teaching.
-</p>
-<p>
-    As an educator, I focus on helping students of all levels—from beginners to advanced players—develop their skills and find their unique sound. My lessons are designed to be engaging, practical, and fun, ensuring you make progress while enjoying the process.
-</p>
-
+            <p>
+                I'm Salvatore Cortone, a full-time harmonica player, multi-instrumentalist, and educator with a lifelong passion for music. From a young age, I've been captivated by the harmonica and its ability to convey emotion and energy across genres.
+            </p>
+            <p>
+                I've performed with bands like <strong>Hugo and the Bad Jujus</strong>, <strong>Oyun Malotira</strong>, and <strong>Magmell</strong>, and have played at festivals across Portugal and internationally. My experience spans a wide range of musical styles, and I bring that diversity to my teaching.
+            </p>
+            <p>
+                As an educator, I focus on helping students of all levels—from beginners to advanced players—develop their skills and find their unique sound. My lessons are designed to be engaging, practical, and fun, ensuring you make progress while enjoying the process.
+            </p>
         </div>
     </section>
 
@@ -116,42 +134,42 @@
                 <i class="fas fa-chevron-left"></i>
             </button>
             <div class="video-grid">
+                <!-- Gallery videos with optimized loading -->
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/aDEm4xFelMU" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/aDEm4xFelMU"></div>
                 </div>
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/t5BaQPWhNcU" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/t5BaQPWhNcU"></div>
                 </div>
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/pFFOZ9_CIgs" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/pFFOZ9_CIgs"></div>
                 </div>
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/ZAik5oCTD_A" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/ZAik5oCTD_A"></div>
                 </div>
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/aDEm4xFelMU" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/aDEm4xFelMU"></div>
                 </div>
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/ZAik5oCTD_A" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/ZAik5oCTD_A"></div>
                 </div>
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/t5BaQPWhNcU" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/t5BaQPWhNcU"></div>
                 </div>
                 <div class="youtube-wrapper">
-                    <iframe width="200" height="350" src="https://www.youtube.com/embed/pFFOZ9_CIgs" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/pFFOZ9_CIgs"></div>
                 </div>
             </div>
             <button class="scroll-arrow right-arrow" aria-label="Scroll right">
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
-
-
-
     </section>
-        
-        <center><a href="https://form.jotform.com/260584437873064" class="btn">Book Your First FREE Lesson</a></center>
-</div>
+
+    <div class="text-center">
+        <a href="https://form.jotform.com/260584437873064" class="btn" target="_blank" rel="noopener noreferrer">Book Your First FREE Lesson</a>
+    </div>
+
     <section id="contact" class="container contact-section">
         <h2>Contacts</h2>
         <p>Book your first free lesson</p>
@@ -159,16 +177,16 @@
             <a href="mailto:salvatorecortone@gmail.com" class="social-icon" aria-label="Email">
                 <i class="far fa-envelope"></i>
             </a>
-            <a href="https://wa.me/351968476706" class="social-icon" aria-label="WhatsApp" target="_blank">
+            <a href="https://wa.me/351968476706" class="social-icon" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-whatsapp"></i>
             </a>
-            <a href="https://www.instagram.com/salharmonica/" class="social-icon" aria-label="Instagram" target="_blank">
+            <a href="https://www.instagram.com/salharmonica/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="https://www.youtube.com/@Salharmonica" class="social-icon" aria-label="YouTube" target="_blank">
+            <a href="https://www.youtube.com/@Salharmonica" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-youtube"></i>
             </a>
-            <a href="https://www.tiktok.com/@salharmonica" class="social-icon" aria-label="TikTok" target="_blank">
+            <a href="https://www.tiktok.com/@salharmonica" class="social-icon" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-tiktok"></i>
             </a>
         </div>
@@ -179,5 +197,40 @@
     </footer>
 
     <script src="script.js"></script>
+    <!-- Add this script for optimized YouTube loading -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to load YouTube iframes only when needed
+            function initYouTubeVideos() {
+                const placeholders = document.querySelectorAll('.video-placeholder');
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const placeholder = entry.target;
+                            const iframe = document.createElement('iframe');
+                            iframe.setAttribute('width', '200');
+                            iframe.setAttribute('height', '350');
+                            iframe.setAttribute('src', placeholder.getAttribute('data-src'));
+                            iframe.setAttribute('frameborder', '0');
+                            iframe.setAttribute('allowfullscreen', '');
+                            placeholder.parentNode.replaceChild(iframe, placeholder);
+                            observer.unobserve(placeholder);
+                        }
+                    });
+                }, {
+                    rootMargin: '100px 0px',
+                    threshold: 0.1
+                });
+
+                placeholders.forEach(placeholder => {
+                    observer.observe(placeholder);
+                });
+            }
+
+            // Initialize the optimized YouTube loading
+            initYouTubeVideos();
+        });
+    </script>
 </body>
 </html>
