@@ -16,6 +16,8 @@
 
 html {
     scroll-behavior: smooth;
+    width: 100%;
+    height: 100%;
 }
 
 body {
@@ -23,17 +25,22 @@ body {
     color: var(--text-color);
     font-family: var(--font-body);
     line-height: 1.6;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 /* --- Typography --- */
 h1, h2, h3 {
     font-family: var(--font-heading);
-    font-weight: 400;
+    font-weight: 700;
     margin-bottom: 1rem;
+    line-height: 1.2;
 }
 
 h1 {
     font-size: clamp(2rem, 5vw, 3rem);
+    text-align: center;
 }
 
 h2 {
@@ -41,6 +48,18 @@ h2 {
     text-align: center;
     margin-bottom: 2rem;
     color: var(--accent-color);
+}
+
+h3 {
+    font-size: clamp(1.3rem, 2vw, 1.5rem);
+    color: var(--accent-color);
+    margin: 2rem 0 1rem;
+}
+
+p {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
 }
 
 a {
@@ -61,6 +80,7 @@ a {
     border: 2px solid var(--accent-color);
     transition: var(--transition-speed);
     text-align: center;
+    margin: 1rem 0;
 }
 
 .btn:hover {
@@ -126,6 +146,7 @@ nav {
 /* --- Hero Section --- */
 .hero {
     height: 100vh;
+    width: 100%;
     background:
         linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
         url('Images/salva_profile.png');
@@ -148,21 +169,24 @@ nav {
     padding: 8rem 5% 5rem;
     max-width: 1200px;
     margin: auto;
+    width: 100%;
 }
 
-/* --- Method Section - Full Width Background for PC --- */
+/* --- Method Section --- */
 #method {
     min-height: 100vh;
+    width: 100vw;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     overflow: hidden;
-    padding: 0; /* Rimuove eventuali padding indesiderati */
+    padding: 0;
+    margin: 0;
+    left: 0;
 }
 
-/* Sfondo per PC (default) - Full width */
 #method::before {
     content: "";
     position: absolute;
@@ -173,98 +197,105 @@ nav {
     background:
         linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
         url('Images/method_image_pc.JPEG');
-    background-size: cover; /* Copre tutta l'area */
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-
-    /* Effetto blur SOLO in alto e in basso (no ai lati) */
-    -webkit-mask-image:
-        linear-gradient(to bottom,
-            transparent 0%,
-            black 10%,
-            black 90%,
-            transparent 100%);
-    mask-image:
-        linear-gradient(to bottom,
-            transparent 0%,
-            black 10%,
-            black 90%,
-            transparent 100%);
-}
-
-/* Sfondo per mobile */
-@media (max-width: 768px) {
-    #method::before {
-        background-image:
-            linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            url('Images/method_image_mobile.JPEG');
-
-        /* Effetto blur più leggero su mobile */
-        -webkit-mask-image:
-            linear-gradient(to bottom,
-                transparent 0%,
-                black 5%,
-                black 95%,
-                transparent 100%);
-        mask-image:
-            linear-gradient(to bottom,
-                transparent 0%,
-                black 5%,
-                black 95%,
-                transparent 100%);
-    }
-}
-
-
-/* --- Students Section --- */
-#students {
-    min-height: 100vh;
-    background: #000;
-}
-
-/* --- About Section - Corrected Version --- */
-#about {
-    min-height: 100vh;
-    background:
-        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-        url('Images/about_image.JPEG');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: scroll;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem 0; /* Padding verticale solo */
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
 }
 
 .about-text {
     max-width: 800px;
     width: 100%;
-    text-align: left; /* Mantiene l'allineamento originale del testo */
-    padding: 0 1rem; /* Solo padding orizzontale */
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: left;
+    position: relative;
+    z-index: 1;
 }
 
-.about-text h2 {
-    text-align: left; /* Mantiene l'allineamento originale del titolo */
+.method-highlights {
+    margin: 2rem 0;
+}
+
+.method-highlights ul {
+    list-style: none;
+    margin: 1.5rem 0;
+    padding: 0;
+}
+
+.method-highlights li {
+    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.method-highlights li:before {
+    content: "•";
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: -0.2rem;
+}
+
+.lesson-info {
+    margin: 2rem 0;
+}
+
+.lesson-info p {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    margin-bottom: 0.5rem;
+}
+
+/* --- About Section --- */
+#about {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 2rem 0;
+}
+
+#about::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('Images/about_image_pc.JPEG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+#about .about-text {
+    text-align: left;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+#about h2 {
+    text-align: left;
     margin-bottom: 1.5rem;
 }
-
-@media (max-width: 768px) {
-    #about {
-        background-position: 50% 30%; /* Centra meglio l'immagine su mobile */
-        padding: 1rem 0; /* Riduce il padding verticale su mobile */
-    }
-
-    .about-text {
-        padding: 0 0.5rem; /* Riduce il padding orizzontale su mobile */
-        margin: 0 auto; /* Centra il contenuto su mobile */
-    }
-}
-
-
 
 /* --- Video Section --- */
 .video-container {
@@ -275,7 +306,6 @@ nav {
     margin: 2rem 0;
 }
 
-/* Edge fade effect */
 .video-container::before,
 .video-container::after {
     content: "";
@@ -297,7 +327,6 @@ nav {
     background: linear-gradient(to left, #000, transparent);
 }
 
-/* Video Grid */
 .video-grid {
     display: flex;
     overflow-x: auto;
@@ -315,7 +344,6 @@ nav {
     display: none;
 }
 
-/* Video Items */
 .youtube-wrapper {
     flex: 0 0 auto;
     width: 200px;
@@ -335,7 +363,7 @@ nav {
     background: #000;
 }
 
-/* Scroll Arrows */
+/* --- Scroll Arrows --- */
 .scroll-arrow {
     position: absolute;
     top: 50%;
@@ -454,6 +482,27 @@ footer {
 
     .container {
         padding: 6rem 5% 3rem;
+        width: 100%;
+    }
+
+    #method {
+        width: 100%;
+        left: 0;
+    }
+
+    #method::before {
+        width: 100%;
+        height: 100%;
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            url('Images/method_image_mobile.JPEG');
+    }
+
+    /* Mobile About Section */
+    #about::before {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            url('Images/about_image_mobile.JPEG');
     }
 
     .video-container {
@@ -473,5 +522,14 @@ footer {
     .social-icon {
         width: 2.5rem;
         height: 2.5rem;
+    }
+
+    .about-text,
+    .method-highlights {
+        padding: 0 0.5rem;
+    }
+
+    .method-highlights li {
+        padding-left: 1rem;
     }
 }
