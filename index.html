@@ -6,29 +6,8 @@
     <meta name="description" content="Harmonica lessons with Salvatore Harmonica. Learn to play blues, rock, pop, and more with a practical, step-by-step method.">
     <title>Sal Harmonica - Harmonica Lessons</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Load only necessary font variants -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
-    <!-- Load Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Temporary fix for button alignment */
-        .text-center {
-            text-align: center;
-            margin: 2rem 0;
-            clear: both;
-            display: block;
-        }
-        .btn {
-            display: inline-block;
-        }
-        /* YouTube iframe optimization */
-        .youtube-wrapper iframe {
-            width: 100%;
-            max-width: 200px;
-            height: 350px;
-            background: #000;
-        }
-    </style>
 </head>
 <body>
     <nav>
@@ -92,7 +71,10 @@
                 <i class="fas fa-chevron-left"></i>
             </button>
             <div class="video-grid">
-                <!-- YouTube iframes with optimized loading -->
+                <!-- Videos will be cloned for infinite scroll -->
+                <div class="youtube-wrapper">
+                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/aDEm4xFelMU"></div>
+                </div>
                 <div class="youtube-wrapper">
                     <div class="video-placeholder" data-src="https://www.youtube.com/embed/aDEm4xFelMU"></div>
                 </div>
@@ -112,7 +94,6 @@
         </div>
     </section>
 
-    
     <section id="about" class="container about-section">
         <div class="about-text">
             <h2>About Me</h2>
@@ -135,7 +116,7 @@
                 <i class="fas fa-chevron-left"></i>
             </button>
             <div class="video-grid">
-                <!-- Gallery videos with optimized loading -->
+                <!-- Videos will be cloned for infinite scroll -->
                 <div class="youtube-wrapper">
                     <div class="video-placeholder" data-src="https://www.youtube.com/embed/aDEm4xFelMU"></div>
                 </div>
@@ -150,15 +131,6 @@
                 </div>
                 <div class="youtube-wrapper">
                     <div class="video-placeholder" data-src="https://www.youtube.com/embed/aDEm4xFelMU"></div>
-                </div>
-                <div class="youtube-wrapper">
-                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/ZAik5oCTD_A"></div>
-                </div>
-                <div class="youtube-wrapper">
-                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/t5BaQPWhNcU"></div>
-                </div>
-                <div class="youtube-wrapper">
-                    <div class="video-placeholder" data-src="https://www.youtube.com/embed/pFFOZ9_CIgs"></div>
                 </div>
             </div>
             <button class="scroll-arrow right-arrow" aria-label="Scroll right">
@@ -173,7 +145,6 @@
 
     <section id="contact" class="container contact-section">
         <h2>Contacts</h2>
-        <p></p>
         <div class="socials">
             <a href="mailto:salvatorecortone@gmail.com" class="social-icon" aria-label="Email">
                 <i class="far fa-envelope"></i>
@@ -198,40 +169,16 @@
     </footer>
 
     <script src="script.js"></script>
-    <!-- Add this script for optimized YouTube loading -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Function to load YouTube iframes only when needed
-            function initYouTubeVideos() {
-                const placeholders = document.querySelectorAll('.video-placeholder');
+<a
+  href="https://wa.me/351968476706"
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Chat on WhatsApp"
+>
+  <i class="fab fa-whatsapp"></i>
+</a>
+</body>
 
-                const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const placeholder = entry.target;
-                            const iframe = document.createElement('iframe');
-                            iframe.setAttribute('width', '200');
-                            iframe.setAttribute('height', '350');
-                            iframe.setAttribute('src', placeholder.getAttribute('data-src'));
-                            iframe.setAttribute('frameborder', '0');
-                            iframe.setAttribute('allowfullscreen', '');
-                            placeholder.parentNode.replaceChild(iframe, placeholder);
-                            observer.unobserve(placeholder);
-                        }
-                    });
-                }, {
-                    rootMargin: '100px 0px',
-                    threshold: 0.1
-                });
-
-                placeholders.forEach(placeholder => {
-                    observer.observe(placeholder);
-                });
-            }
-
-            // Initialize the optimized YouTube loading
-            initYouTubeVideos();
-        });
-    </script>
 </body>
 </html>
