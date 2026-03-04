@@ -75,7 +75,7 @@ a {
 /* --- Buttons --- */
 .btn {
     display: inline-block;
-    padding: 8px 20px;
+    padding: 8px 20px; /* Smaller padding */
     background: var(--accent-color);
     color: #000;
     font-weight: bold;
@@ -85,9 +85,10 @@ a {
     transition: var(--transition-speed);
     text-align: center;
     margin: 1rem auto;
-    font-size: 0.85rem;
-    min-width: 180px;
+    font-size: 0.85rem; /* Smaller font */
+    min-width: 180px; /* Fixed minimum width */
 }
+
 
 /* --- Navigation --- */
 nav {
@@ -106,20 +107,6 @@ nav {
     font-family: var(--font-heading);
     font-size: clamp(1.2rem, 3vw, 1.5rem);
     letter-spacing: 2px;
-}
-
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.menu-toggle .bar {
-    width: 25px;
-    height: 3px;
-    margin: 3px 0;
-    background-color: var(--text-color);
-    transition: var(--transition-speed);
 }
 
 .nav-links {
@@ -171,13 +158,20 @@ nav {
     padding: 0;
 }
 
-#method .method-bg {
+#method::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('Images/method_image_pc.JPEG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     z-index: -1;
 }
 
@@ -264,13 +258,20 @@ nav {
     padding: 0;
 }
 
-#about .about-bg {
+#about::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('Images/about_image_pc.JPEG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     z-index: -1;
 }
 
@@ -307,87 +308,34 @@ nav {
 .video-container {
     position: relative;
     width: 100%;
-    height: 90vh; /* Full viewport height */
-    margin: 1rem auto;
+    height: 370px;
+    margin: 2rem auto;
     overflow: hidden;
-    touch-action: pan-y pan-x;
 }
 
 .video-grid {
     display: flex;
-    gap: 0.5rem;
-    height: 100%;
+    gap: var(--video-gap);
+    padding: 0.625rem;
+    height: 370px;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding: 0 1rem;
-    width: 100%;
-}
-
-.video-grid::-webkit-scrollbar {
-    display: none;
+    width: calc(var(--video-width) * var(--visible-videos) + var(--video-gap) * 2);
+    margin: 0 auto;
 }
 
 .youtube-wrapper {
+    flex: 0 0 var(--video-width);
+    width: var(--video-width);
+    height: 350px;
     scroll-snap-align: start;
-    flex: 0 0 85%; /* Slightly less than 100% to allow peeking */
-    height: 100%;
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #000;
 }
 
-.youtube-wrapper iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 12px;
-    object-fit: cover;
-}
-
-/* Scroll arrows (optional) */
-.scroll-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: var(--accent-color);
-    border: none;
-    width: 40px;
-    height: 60px;
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.left-arrow { left: 10px; }
-.right-arrow { right: 10px; }
-
-/* Mobile: Full-width videos */
-@media (max-width: 768px) {
-    .video-grid {
-        gap: 0.25rem;
-        padding: 0 0.5rem;
-    }
-    .youtube-wrapper {
-        flex: 0 0 90%;
-        min-width: 90%;
-    }
-    .scroll-arrow {
-        width: 30px;
-        height: 50px;
-    }
-}
-
-
-/* --- Scroll Arrows --- */
+/* --- Scroll Arrows (Closer to Videos) --- */
 .scroll-arrow {
     position: absolute;
     top: 50%;
@@ -407,12 +355,13 @@ nav {
 }
 
 .left-arrow {
-    left: 10px;
+    left: 10px; /* Closer to the videos */
 }
 
 .right-arrow {
-    right: 10px;
+    right: 10px; /* Closer to the videos */
 }
+
 
 /* --- Contact & Footer --- */
 .contact-section {
@@ -484,32 +433,6 @@ footer {
     margin: 0 auto;
 }
 
-/* --- WhatsApp Floating Icon --- */
-.whatsapp-float {
-    position: fixed;
-    width: 70px;
-    height: 70px;
-    bottom: 30px;
-    right: 30px;
-    background-color: #25D366;
-    color: #FFF;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 45px;
-    box-shadow: 2px 2px 3px #999;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.whatsapp-float:hover {
-    background-color: #128C7E;
-    transform: scale(1.1);
-    color: #FFF;
-}
-
 /* --- Mobile Styles --- */
 @media (max-width: 768px) {
     :root {
@@ -517,19 +440,23 @@ footer {
         --visible-videos: 1.5;
     }
 
+    h1 {
+        font-size: 2rem;
+    }
+
     .menu-toggle {
         display: flex;
     }
 
     .nav-links {
-        position: fixed;
+        position: absolute;
         top: 70px;
-        left: 0;
+        right: 0;
         width: 100%;
         background: rgba(18, 18, 18, 0.98);
         flex-direction: column;
-        align-items: center;
-        padding: 1rem 0;
+        text-align: center;
+        padding: 1.25rem 0;
         display: none;
     }
 
@@ -538,32 +465,28 @@ footer {
     }
 
     .nav-links li {
-        margin: 0.5rem 0;
-        width: 100%;
-        text-align: center;
+        margin: 0.9375rem 0;
     }
 
-    .nav-links a {
-        padding: 0.5rem;
-        width: 100%;
+    #method::before {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            url('Images/method_image_mobile.JPEG');
+    }
+
+    #about::before {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            url('Images/about_image_mobile.JPEG');
     }
 
     .video-container {
         height: 300px;
-        margin: 1rem auto;
     }
 
     .video-grid {
         height: 300px;
-        gap: 0.5rem;
-        padding: 0.5rem;
-        width: 100%;
-    }
-
-    .youtube-wrapper {
-        flex: 0 0 85%;
-        min-width: 85%;
-        height: 200px;
+        padding: 0.625rem;
     }
 
     .scroll-arrow {
@@ -588,136 +511,30 @@ footer {
     .method-highlights ul {
         text-align: left;
     }
-
-    h1 {
-        font-size: 1.8rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    p {
-        font-size: 0.9rem;
-    }
-
-    .btn {
-        padding: 6px 16px;
-        font-size: 0.8rem;
-        min-width: 150px;
-    }
-
-    .whatsapp-float {
-        width: 60px;
-        height: 60px;
-        bottom: 20px;
-        right: 20px;
-        font-size: 35px;
-    }
 }
 
-/* ================= NETFLIX STYLE CAROUSEL ================= */
-
-.carousel-section {
-    padding: 6rem 5%;
-    background: #000;
-    position: relative;
+/* --- WhatsApp Floating Icon --- */
+.whatsapp-float {
+  position: fixed;
+  width: 70px;          /* Slightly bigger */
+  height: 70px;         /* Slightly bigger */
+  bottom: 30px;        /* A bit more inside (up) */
+  right: 30px;         /* A bit more inside (left) */
+  background-color: #25D366;
+  color: #FFF;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 45px;     /* Slightly bigger icon */
+  box-shadow: 2px 2px 3px #999;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
-.carousel-section h2 {
-    text-align: left;
-    margin-bottom: 2rem;
-    color: #d4af37;
-}
-
-/* Container */
-.carousel-container {
-    position: relative;
-}
-
-/* Track */
-.carousel-track {
-    display: flex;
-    gap: 1.5rem;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    padding: 1rem 0;
-}
-
-.carousel-track::-webkit-scrollbar {
-    display: none;
-}
-
-/* Item */
-.carousel-item {
-    flex: 0 0 33.333%;
-    transition: transform 0.3s ease;
-}
-
-.carousel-item iframe {
-    width: 100%;
-    height: 420px;
-    border-radius: 16px;
-    border: none;
-}
-
-/* Hover Effect */
-.carousel-item:hover {
-    transform: scale(1.05);
-    z-index: 2;
-}
-
-/* Arrows */
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0,0,0,0.7);
-    color: #d4af37;
-    border: none;
-    font-size: 2rem;
-    width: 50px;
-    height: 70px;
-    cursor: pointer;
-    z-index: 5;
-    transition: 0.3s ease;
-}
-
-.carousel-btn:hover {
-    background: rgba(0,0,0,0.9);
-}
-
-.carousel-btn.left {
-    left: -20px;
-}
-
-.carousel-btn.right {
-    right: -20px;
-}
-
-/* Tablet */
-@media (max-width: 1024px) {
-    .carousel-item {
-        flex: 0 0 50%;
-    }
-
-    .carousel-item iframe {
-        height: 360px;
-    }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .carousel-item {
-        flex: 0 0 85%;
-    }
-
-    .carousel-item iframe {
-        height: 300px;
-    }
-
-    .carousel-btn {
-        display: none;
-    }
+.whatsapp-float:hover {
+  background-color: #128C7E;
+  transform: scale(1.1);
+  color: #FFF;
 }
