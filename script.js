@@ -1,124 +1,136 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // =========================
-    // VIDEO GALLERY WITH INFINITE SCROLL
-    // =========================
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* =========================
+       LAZY LOAD YOUTUBE VIDEOS
+    ========================= */
+
+    function loadVideo(placeholder) {
+        const iframe = document.createElement("iframe");
+
+        iframe.src = placeholder.dataset.src;
+        iframe.width = "200";
+        iframe.height = "350";
+        iframe.frameBorder = "0";
+        iframe.loading = "lazy";
+        iframe.allowFullscreen = true;
+        iframe.allow =
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+
+        placeholder.replaceWith(iframe);
+    }
+
+    function initLazyLoad() {
+
+        const placeholders = document.querySelectorAll(".video-placeholder");
+
+        if (!("IntersectionObserver" in window)) {
+            placeholders.forEach(loadVideo);
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+                    loadVideo(entry.target);
+                    obs.unobserve(entry.target);
+                }
+
+            });
+        }, {
+            rootMargin: "200px",
+            threshold: 0.1
+        });
+
+        placeholders.forEach(video => observer.observe(video));
+    }
+
+
+    /* =========================
+       VIDEO GALLERY SCROLLER
+    ========================= */
+
     class VideoGallery {
+
         constructor(container) {
-            this.container = container;
-            this.videoGrid = container.querySelector('.video-grid');
-            this.leftArrow = container.querySelector('.left-arrow');
-            this.rightArrow = container.querySelector('.right-arrow');
-            this.wrappers = Array.from(container.querySelectorAll('.youtube-wrapper'));
-            this.videoWidth = this.wrappers[0].offsetWidth + parseFloat(getComputedStyle(this.wrappers[0]).marginRight);
-            this.scrollAmount = this.videoWidth * 3; // Scroll 3 videos at a time
-            this.currentScroll = 0;
-            this.isScrolling = false;
+
+            this.grid = container.querySelector(".video-grid");
+            this.left = container.querySelector(".left-arrow");
+            this.right = container.querySelector(".right-arrow");
+
+            this.videoWidth =
+                container.querySelector(".youtube-wrapper").offsetWidth + 20;
+
+            this.scrollAmount = this.videoWidth * 3;
 
             this.init();
         }
 
         init() {
-            if (!this.videoGrid || this.wrappers.length === 0) return;
 
-            // Clone videos for infinite scroll
-            this.wrappers.forEach(wrapper => {
+            this.cloneVideos();
+
+            if (this.right) {
+                this.right.addEventListener("click", () => {
+                    this.grid.scrollBy({
+                        left: this.scrollAmount,
+                        behavior: "smooth"
+                    });
+                });
+            }
+
+            if (this.left) {
+                this.left.addEventListener("click", () => {
+                    this.grid.scrollBy({
+                        left: -this.scrollAmount,
+                        behavior: "smooth"
+                    });
+                });
+            }
+
+            this.grid.addEventListener("scroll", () => this.infiniteScroll());
+
+        }
+
+        cloneVideos() {
+
+            const wrappers = this.grid.querySelectorAll(".youtube-wrapper");
+
+            wrappers.forEach(wrapper => {
                 const clone = wrapper.cloneNode(true);
-                this.videoGrid.appendChild(clone);
+                this.grid.appendChild(clone);
             });
 
-            // Arrow click handlers
-            this.rightArrow.addEventListener('click', () => this.scrollRight());
-            this.leftArrow.addEventListener('click', () => this.scrollLeft());
-
-            // Handle infinite scroll on manual scroll
-            this.videoGrid.addEventListener('scroll', () => this.handleInfiniteScroll());
+            initLazyLoad();
         }
 
-        scrollRight() {
-            if (this.isScrolling) return;
-            this.isScrolling = true;
-            this.currentScroll += this.scrollAmount;
-            this.videoGrid.scrollTo({
-                left: this.currentScroll,
-                behavior: 'smooth'
-            });
-            setTimeout(() => { this.isScrolling = false; }, 1000);
-        }
+        infiniteScroll() {
 
-        scrollLeft() {
-            if (this.isScrolling) return;
-            this.isScrolling = true;
-            this.currentScroll -= this.scrollAmount;
-            this.videoGrid.scrollTo({
-                left: this.currentScroll,
-                behavior: 'smooth'
-            });
-            setTimeout(() => { this.isScrolling = false; }, 1000);
-        }
+            const scrollLeft = this.grid.scrollLeft;
+            const scrollWidth = this.grid.scrollWidth;
+            const visibleWidth = this.grid.clientWidth;
 
-        handleInfiniteScroll() {
-            const scrollLeft = this.videoGrid.scrollLeft;
-            const scrollWidth = this.videoGrid.scrollWidth;
-            const clientWidth = this.videoGrid.clientWidth;
-
-            // If scrolled near the end, append clones
-            if (scrollLeft + clientWidth >= scrollWidth - 100) {
-                this.wrappers.forEach(wrapper => {
-                    const clone = wrapper.cloneNode(true);
-                    this.videoGrid.appendChild(clone);
-                });
-                this.videoGrid.scrollLeft = scrollLeft - 100;
+            if (scrollLeft + visibleWidth >= scrollWidth - 150) {
+                this.cloneVideos();
             }
 
-            // If scrolled near the beginning, prepend clones
-            if (scrollLeft <= 100) {
-                this.wrappers.forEach(wrapper => {
-                    const clone = wrapper.cloneNode(true);
-                    this.videoGrid.insertBefore(clone, this.videoGrid.firstChild);
-                });
-                this.videoGrid.scrollLeft = scrollLeft + 100;
-            }
         }
     }
 
-    // Initialize all video galleries
-    document.querySelectorAll('.video-container').forEach(container => {
+
+    /* =========================
+       INIT ALL GALLERIES
+    ========================= */
+
+    document.querySelectorAll(".video-container").forEach(container => {
         new VideoGallery(container);
     });
 
-    // =========================
-    // LAZY LOAD YOUTUBE IFRAMES
-    // =========================
-    function initLazyLoad() {
-        const lazyVideos = document.querySelectorAll('.video-placeholder');
-        if ('IntersectionObserver' in window) {
-            const videoObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const placeholder = entry.target;
-                        const iframe = document.createElement('iframe');
-                        iframe.setAttribute('width', '200');
-                        iframe.setAttribute('height', '350');
-                        iframe.setAttribute('src', placeholder.getAttribute('data-src'));
-                        iframe.setAttribute('frameborder', '0');
-                        iframe.setAttribute('allowfullscreen', '');
-                        placeholder.parentNode.replaceChild(iframe, placeholder);
-                        observer.unobserve(placeholder);
-                    }
-                });
-            }, { rootMargin: '100px 0px', threshold: 0.1 });
-            lazyVideos.forEach(video => videoObserver.observe(video));
-        } else {
-            lazyVideos.forEach(placeholder => {
-                const iframe = document.createElement('iframe');
-                iframe.setAttribute('width', '200');
-                iframe.setAttribute('height', '350');
-                iframe.setAttribute('src', placeholder.getAttribute('data-src'));
-                iframe.setAttribute('frameborder', '0');
-                iframe.setAttribute('allowfullscreen', '');
-                placeholder.parentNode.replaceChild(iframe, placeholder);
-            });
-        }
-    }
+
+    /* =========================
+       START LAZY LOADING
+    ========================= */
+
     initLazyLoad();
+
 });

@@ -149,7 +149,7 @@ nav {
 #method {
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -249,7 +249,7 @@ nav {
 #about {
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -469,16 +469,24 @@ footer {
     }
 
     #method::before {
-        background-image:
-            linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            url('Images/method_image_mobile.JPEG');
-    }
+     background:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('Images/method_image_mobile.JPEG');
+     background-size: cover;
+     background-position: center top;
+     background-repeat: no-repeat;
+     background-attachment: scroll;
+     }
 
     #about::before {
-        background-image:
-            linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-            url('Images/about_image_mobile.JPEG');
-    }
+     background:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('Images/about_image_mobile.JPEG');
+     background-size: cover;
+     background-position: center top;
+     background-repeat: no-repeat;
+     background-attachment: scroll;
+     }
 
     .video-container {
         height: 300px;
