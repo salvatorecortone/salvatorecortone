@@ -1,136 +1,166 @@
-document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================
-       LAZY LOAD YOUTUBE VIDEOS
-    ========================= */
+// =============================================
+// SAL HARMONICA WEBSITE - MAIN SCRIPT
+// Features: Mobile Menu, Infinite Video Gallery, Smooth Scroll, Drag Scroll, Touch Optimization
+// =============================================
 
-    function loadVideo(placeholder) {
-        const iframe = document.createElement("iframe");
+document.addEventListener('DOMContentLoaded', function() {
 
-        iframe.src = placeholder.dataset.src;
-        iframe.width = "200";
-        iframe.height = "350";
-        iframe.frameBorder = "0";
-        iframe.loading = "lazy";
-        iframe.allowFullscreen = true;
-        iframe.allow =
-            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    // =========================
+    // MOBILE MENU
+    // =========================
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
 
-        placeholder.replaceWith(iframe);
-    }
+    // Toggle mobile menu
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
 
-    function initLazyLoad() {
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-links li a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
 
-        const placeholders = document.querySelectorAll(".video-placeholder");
+    // =========================
+    // VIDEO GALLERY (FOR BOTH STUDENTS AND GALLERY SECTIONS)
+    // =========================
+    const videoContainers = document.querySelectorAll('.video-container');
 
-        if (!("IntersectionObserver" in window)) {
-            placeholders.forEach(loadVideo);
+    videoContainers.forEach(container => {
+        const videoGrid = container.querySelector('.video-grid');
+        const leftArrow = container.querySelector('.left-arrow');
+        const rightArrow = container.querySelector('.right-arrow');
+        const wrappers = container.querySelectorAll('.youtube-wrapper');
+
+        if (!videoGrid || wrappers.length === 0) {
+            console.log("Video gallery not found for this container");
             return;
         }
 
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-                    loadVideo(entry.target);
-                    obs.unobserve(entry.target);
-                }
-
-            });
-        }, {
-            rootMargin: "200px",
-            threshold: 0.1
+        // Clone videos to create initial infinite loop
+        wrappers.forEach(wrapper => {
+            const clone = wrapper.cloneNode(true);
+            videoGrid.appendChild(clone);
         });
 
-        placeholders.forEach(video => observer.observe(video));
-    }
+        // Calculate dynamic scroll size
+        const videoWidth = wrappers[0].offsetWidth;
+        const gap = 20;
+        const scrollAmount = videoWidth * 2 + gap * 2; // Scroll by 2 videos at a time
 
+        // Flags
+        let isArrowScrolling = false;
+        let isDown = false;
+        let startX;
+        let scrollLeft;
 
-    /* =========================
-       VIDEO GALLERY SCROLLER
-    ========================= */
-
-    class VideoGallery {
-
-        constructor(container) {
-
-            this.grid = container.querySelector(".video-grid");
-            this.left = container.querySelector(".left-arrow");
-            this.right = container.querySelector(".right-arrow");
-
-            this.videoWidth =
-                container.querySelector(".youtube-wrapper").offsetWidth + 20;
-
-            this.scrollAmount = this.videoWidth * 3;
-
-            this.init();
-        }
-
-        init() {
-
-            this.cloneVideos();
-
-            if (this.right) {
-                this.right.addEventListener("click", () => {
-                    this.grid.scrollBy({
-                        left: this.scrollAmount,
-                        behavior: "smooth"
-                    });
-                });
-            }
-
-            if (this.left) {
-                this.left.addEventListener("click", () => {
-                    this.grid.scrollBy({
-                        left: -this.scrollAmount,
-                        behavior: "smooth"
-                    });
-                });
-            }
-
-            this.grid.addEventListener("scroll", () => this.infiniteScroll());
-
-        }
-
-        cloneVideos() {
-
-            const wrappers = this.grid.querySelectorAll(".youtube-wrapper");
-
-            wrappers.forEach(wrapper => {
-                const clone = wrapper.cloneNode(true);
-                this.grid.appendChild(clone);
+        // =========================
+        // SMOOTH SCROLL FUNCTION
+        // =========================
+        function smoothScroll(distance) {
+            isArrowScrolling = true;
+            videoGrid.scrollBy({
+                left: distance,
+                behavior: 'smooth'
             });
-
-            initLazyLoad();
+            // Re-enable infinite scroll after scroll completes
+            setTimeout(() => {
+                isArrowScrolling = false;
+            }, 1000);
         }
 
-        infiniteScroll() {
+        // =========================
+        // ARROWS EVENT LISTENERS
+        // =========================
+        if (rightArrow) {
+            rightArrow.addEventListener('click', () => {
+                smoothScroll(scrollAmount);
+            });
+        }
 
-            const scrollLeft = this.grid.scrollLeft;
-            const scrollWidth = this.grid.scrollWidth;
-            const visibleWidth = this.grid.clientWidth;
+        if (leftArrow) {
+            leftArrow.addEventListener('click', () => {
+                smoothScroll(-scrollAmount);
+            });
+        }
 
-            if (scrollLeft + visibleWidth >= scrollWidth - 150) {
-                this.cloneVideos();
+        // =========================
+        // DRAG SCROLL
+        // =========================
+        videoGrid.addEventListener('mousedown', (e) => {
+            isDown = true;
+            videoGrid.style.cursor = "grabbing";
+            startX = e.pageX - videoGrid.offsetLeft;
+            scrollLeft = videoGrid.scrollLeft;
+        });
+
+        videoGrid.addEventListener('mouseleave', () => {
+            isDown = false;
+            videoGrid.style.cursor = "grab";
+        });
+
+        videoGrid.addEventListener('mouseup', () => {
+            isDown = false;
+            videoGrid.style.cursor = "grab";
+        });
+
+        videoGrid.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - videoGrid.offsetLeft;
+            const walk = (x - startX) * 1.3;
+            videoGrid.scrollLeft = scrollLeft - walk;
+        });
+
+        // =========================
+        // TOUCH OPTIMIZATION
+        // =========================
+        videoGrid.addEventListener('touchstart', () => {
+            videoGrid.style.scrollBehavior = "smooth";
+        });
+
+        // =========================
+        // CENTER FIRST VIDEO ON LOAD
+        // =========================
+        setTimeout(() => {
+            const firstVideo = wrappers[0];
+            const offset = firstVideo.offsetLeft - (videoGrid.clientWidth / 2) + (firstVideo.clientWidth / 2);
+            videoGrid.scrollTo({
+                left: offset,
+                behavior: 'smooth'
+            });
+        }, 300);
+
+        // =========================
+        // INFINITE SCROLL LOGIC
+        // =========================
+        videoGrid.addEventListener('scroll', () => {
+            if (isArrowScrolling) return;
+
+            const scrollLeft = videoGrid.scrollLeft;
+            const scrollWidth = videoGrid.scrollWidth;
+            const clientWidth = videoGrid.clientWidth;
+
+            // If scrolled to the end, append cloned videos
+            if (scrollLeft + clientWidth >= scrollWidth - 100) {
+                wrappers.forEach(wrapper => {
+                    const clone = wrapper.cloneNode(true);
+                    videoGrid.appendChild(clone);
+                });
             }
 
-        }
-    }
-
-
-    /* =========================
-       INIT ALL GALLERIES
-    ========================= */
-
-    document.querySelectorAll(".video-container").forEach(container => {
-        new VideoGallery(container);
+            // If scrolled to the beginning, prepend cloned videos
+            if (scrollLeft <= 100) {
+                wrappers.forEach(wrapper => {
+                    const clone = wrapper.cloneNode(true);
+                    videoGrid.insertBefore(clone, videoGrid.firstChild);
+                });
+                // Reset scroll position to avoid backward movement
+                videoGrid.scrollLeft = scrollLeft + (videoWidth * wrappers.length + gap * wrappers.length);
+            }
+        });
     });
-
-
-    /* =========================
-       START LAZY LOADING
-    ========================= */
-
-    initLazyLoad();
-
 });
