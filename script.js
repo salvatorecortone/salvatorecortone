@@ -1,7 +1,6 @@
-
 // =============================================
-// SAL HARMONICA WEBSITE - MAIN SCRIPT
-// Features: Mobile Menu, Infinite Video Gallery, Smooth Scroll, Drag Scroll, Touch Optimization
+// SAL HARMONICA WEBSITE - MAIN SCRIPT (LIGHTER VERSION)
+// Features: Mobile Menu, Video Gallery (No Infinite Scroll), Smooth Scroll, Drag Scroll, Touch Optimization
 // =============================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -13,14 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.getElementById('nav-links');
 
     // Toggle mobile menu
-    mobileMenu.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
+    mobileMenu?.addEventListener('click', () => {
+        navLinks?.classList.toggle('active');
     });
 
     // Close menu when clicking a link
     document.querySelectorAll('.nav-links li a').forEach(link => {
         link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
+            navLinks?.classList.remove('active');
         });
     });
 
@@ -40,19 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Clone videos to create initial infinite loop
-        wrappers.forEach(wrapper => {
-            const clone = wrapper.cloneNode(true);
-            videoGrid.appendChild(clone);
-        });
-
         // Calculate dynamic scroll size
         const videoWidth = wrappers[0].offsetWidth;
         const gap = 20;
         const scrollAmount = videoWidth * 2 + gap * 2; // Scroll by 2 videos at a time
 
         // Flags
-        let isArrowScrolling = false;
         let isDown = false;
         let startX;
         let scrollLeft;
@@ -61,31 +53,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // SMOOTH SCROLL FUNCTION
         // =========================
         function smoothScroll(distance) {
-            isArrowScrolling = true;
             videoGrid.scrollBy({
                 left: distance,
                 behavior: 'smooth'
             });
-            // Re-enable infinite scroll after scroll completes
-            setTimeout(() => {
-                isArrowScrolling = false;
-            }, 1000);
         }
 
         // =========================
         // ARROWS EVENT LISTENERS
         // =========================
-        if (rightArrow) {
-            rightArrow.addEventListener('click', () => {
-                smoothScroll(scrollAmount);
-            });
-        }
+        rightArrow?.addEventListener('click', () => {
+            smoothScroll(scrollAmount);
+        });
 
-        if (leftArrow) {
-            leftArrow.addEventListener('click', () => {
-                smoothScroll(-scrollAmount);
-            });
-        }
+        leftArrow?.addEventListener('click', () => {
+            smoothScroll(-scrollAmount);
+        });
 
         // =========================
         // DRAG SCROLL
@@ -133,34 +116,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 behavior: 'smooth'
             });
         }, 300);
-
-        // =========================
-        // INFINITE SCROLL LOGIC
-        // =========================
-        videoGrid.addEventListener('scroll', () => {
-            if (isArrowScrolling) return;
-
-            const scrollLeft = videoGrid.scrollLeft;
-            const scrollWidth = videoGrid.scrollWidth;
-            const clientWidth = videoGrid.clientWidth;
-
-            // If scrolled to the end, append cloned videos
-            if (scrollLeft + clientWidth >= scrollWidth - 100) {
-                wrappers.forEach(wrapper => {
-                    const clone = wrapper.cloneNode(true);
-                    videoGrid.appendChild(clone);
-                });
-            }
-
-            // If scrolled to the beginning, prepend cloned videos
-            if (scrollLeft <= 100) {
-                wrappers.forEach(wrapper => {
-                    const clone = wrapper.cloneNode(true);
-                    videoGrid.insertBefore(clone, videoGrid.firstChild);
-                });
-                // Reset scroll position to avoid backward movement
-                videoGrid.scrollLeft = scrollLeft + (videoWidth * wrappers.length + gap * wrappers.length);
-            }
-        });
     });
 });
