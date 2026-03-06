@@ -186,10 +186,6 @@ max-width:1200px;
 margin:auto;
 }
 
-
-
-/* --- Sections FIXED --- */
-
 /* METHOD */
 
 #method{
@@ -219,7 +215,7 @@ background:#000;
 
 #about{
 
-height:100vh;
+min-height:100vh;
 
 background:
 linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
@@ -253,13 +249,13 @@ filter:sepia(20%);
 /* ================= */
 
 .video-container{
-
 position:relative;
+display:flex;
+align-items:center;
 width:100%;
 height:370px;
-
 overflow:hidden;
-
+margin:20px 0;
 }
 
 
@@ -397,15 +393,6 @@ transform:translateY(-50%) scale(1.1);
 /* =========================
    VIDEO GALLERY ARROWS STYLING
    ========================= */
-
-.video-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    overflow: hidden;
-    margin: 20px 0;
-}
 
 .video-grid {
     display: flex;
