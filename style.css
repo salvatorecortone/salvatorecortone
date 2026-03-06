@@ -179,7 +179,7 @@ margin:auto;
 min-height:100vh;
 width: 100%;
 background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-url('Images/method_image.JPEG');
+url('Images/method_image.jpeg');
 
 background-size:cover;
 background-position:center;
@@ -205,7 +205,7 @@ min-height:100vh;
 
 background:
 linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-url('Images/about_image.JPEG');
+url('Images/about_image.jpeg');
 
 background-size:cover;
 background-position:center;
