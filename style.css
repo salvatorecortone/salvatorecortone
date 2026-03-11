@@ -209,6 +209,8 @@ url('Images/about_image.JPEG');
 
 background-size:cover;
 background-position:center;
+background-repeat: no-repeat;
+
 
 display:flex;
 align-items:center;
@@ -504,4 +506,14 @@ margin:15px 0;
   background-color: #128C7E;
   transform: scale(1.1);
   color: #FFF;
+}
+
+/* Safari-specific override */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    #about {
+      background-position: center; /* or 'top', 'right', etc. */
+      background-attachment: scroll; /* or 'local' */
+    }
+  }
 }
