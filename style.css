@@ -208,7 +208,7 @@ linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
 url('Images/about_image.JPEG');
 
 background-size:cover;
-background-position:center;
+background-position:center center;
 background-repeat: no-repeat;
 
 
@@ -218,7 +218,17 @@ justify-content:center;
 
 text-align:center;
 
+/* Safari fix */
+background-attachment:scroll;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+text-align:center;
+
 }
+
 
 .about-text h2{
 text-align:left;
@@ -508,12 +518,3 @@ margin:15px 0;
   color: #FFF;
 }
 
-/* Safari-specific override */
-@media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance: none) {
-    #about {
-      background-position: center; /* or 'top', 'right', etc. */
-      background-attachment: scroll; /* or 'local' */
-    }
-  }
-}
